@@ -456,18 +456,13 @@
 					ratesElement.innerHTML = `${rate} an hour<br><hr>Max Stay ${maxTime}<br><hr>Open ${openTime}<br><hr>No Parking: ${noParking}<br><hr>Exact Payment Only. No Cash. No Refund.<br><hr><em>*Resident rates available only on PayByPhone</em>`;
 				}
 
-				// Add the following code to change the display property of infoPanel
-				if (features.length) {
-					infoPanel.style.display = 'block';
-				}
-
-				// Hide infoPanel when clicking away
-				window.addEventListener('click', (event) => {
-					const clickedElement = event.target;
-					if (!infoPanel.contains(clickedElement)) {
-						infoPanel.style.display = 'none';
-					}
-				});
+				// Display the infoPanel and hide the actionText
+				infoPanel.style.display = 'block';
+				actionText.style.display = 'none';
+			} else {
+				// Hide the infoPanel and show the actionText
+				infoPanel.style.display = 'none';
+				actionText.style.display = 'block';
 			}
 		});
 
