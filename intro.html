@@ -455,38 +455,24 @@
 				if (ratesElement) {
 					ratesElement.innerHTML = `${rate} an hour<br><hr>Max Stay ${maxTime}<br><hr>Open ${openTime}<br><hr>No Parking: ${noParking}<br><hr>Exact Payment Only. No Cash. No Refund.<br><hr><em>*Resident rates available only on PayByPhone</em>`;
 				}
-				if (isElementOnScreen(chapterName)) {
-					setActiveChapter(chapterName);
-					if (chapterName === 'ex2') {
-						// Hide the infoPanel and show the actionText
-						infoPanel.style.display = 'none';
-						actionText.style.display = 'block';
-					} else {
-						// Display the infoPanel and hide the actionText
-						infoPanel.style.display = 'block';
-						actionText.style.display = 'none';
-					}
+
+				// Add the following code to change the display property of infoPanel
+				if (features.length) {
+					infoPanel.style.display = 'block';
 				}
+
+				// Hide infoPanel when clicking away
+				window.addEventListener('click', (event) => {
+					const clickedElement = event.target;
+					if (!infoPanel.contains(clickedElement)) {
+						infoPanel.style.display = 'none';
+					}
+				});
 			}
 		});
 
 		// Place holderr of Parking Availablity working on retrieving the data from vendor
-		let currentNumber = 15; // Starting number, can be set to any initial value
-		function updateParkingAvailability() {
-			// Randomly decide to add or subtract 1
-			const change = Math.random() < 0.5 ? -1 : 1;
-			// Update the current number
-			currentNumber += change;
-			// Ensure the number stays within the 1 to 80 range
-			if (currentNumber < 1) currentNumber = 1;
-			if (currentNumber > 80) currentNumber = 80;
-			// Update the content of the element
-			document.getElementById("parkingAvailability").innerHTML = `<span>${currentNumber}</span>`;
-		}
-		// Call updateParkingAvailability every 3 seconds (3000 milliseconds)
-		setInterval(updateParkingAvailability, 3000);
-		// Set the initial content
-		document.getElementById("parkingAvailability").innerHTML = `<span>${currentNumber}</span>`;
+
 		// parameters to ensure the model is georeferenced correctly on the map
 		const modelOrigin = [-80.10695493868242, 26.116162232435215];
 		const modelAltitude = 0;
