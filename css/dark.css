@@ -1,16 +1,4 @@
-/* Firefox */
 @media (prefers-color-scheme: dark) {
-    :root {
-        color-scheme: dark;
-    }
-}
-
-/* Chrome */
-@media (forced-colors: active) {
-    :root {
-        color-scheme: dark;
-    }
-}
 
 body {
     background-color: #323232;
@@ -53,7 +41,7 @@ button a {
 }
 
 /* Info Panel */
-div.container {
+div.container2 {
     background: #0f1011;
 }
 
@@ -79,4 +67,6 @@ address a {
 
 .EcoSystem div h3 {
     color: #fff;
+}
+
 }
