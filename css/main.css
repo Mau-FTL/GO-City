@@ -1,0 +1,323 @@
+/* General */
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800&family=Josefin+Sans&family=Roboto:ital,wght@0,300;0,500;1,500;1,700&display=swap");
+
+body {
+ margin: 0 auto;
+ font-size: 16pt;
+ font-family: "Josefin Sans", sans-serif;
+ overflow-x: hidden;
+}
+
+h1 {
+ font-size: 28pt;
+}
+
+h2 {
+ font-size: 22pt;
+}
+
+h3 {
+ font-size: 20pt;
+}
+
+p {
+ font-family: "Roboto", sans-serif;
+}
+
+section {
+ padding: 1em;
+ margin: 0.3em;
+ border-radius: 50px;
+}
+
+img.Icons {
+ width: 16vw;
+}
+
+img.Icons-Small {
+ width: 12vw;
+}
+
+button {
+ border: none;
+ border-radius: 25px;
+ padding: 10px;
+}
+
+button a {
+ text-decoration: none;
+ font-size: 15pt;
+}
+
+a.AppButton {
+ font-size: 10pt;
+}
+
+/* Light & Dark Switch */
+div#dark {
+ position: fixed;
+ left: 25px;
+ top: 10px;
+}
+
+input[type="checkbox"] {
+ height: 0;
+ width: 0;
+ visibility: hidden;
+}
+
+label {
+ cursor: pointer;
+ text-indent: -9999px;
+ width: 50px;
+ height: 25px;
+ background: #363636;
+ display: block;
+ border-radius: 100px;
+ position: relative;
+}
+
+label:after {
+ content: "";
+ position: absolute;
+ top: 2px;
+ left: 2px;
+ width: 22px;
+ height: 22px;
+ background: #fff;
+ border-radius: 90px;
+ transition: 0.3s;
+}
+
+input:checked + label {
+ background: #7e7e7e;
+}
+
+input:checked + label:after {
+ left: calc(100% - 2px);
+ transform: translateX(-100%);
+}
+
+label:active:after {
+ width: 50px;
+}
+
+/* Logo */
+#Logo {
+ position: fixed;
+ top: 5px;
+ left: 5px;
+}
+
+/* Map Box */
+#map {
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ width: 100%;
+ z-index: -1;
+}
+
+div.container {
+ position: absolute;
+ top: 75%;
+ width: 100%;
+ border-radius: 50px 50px 50px 50px;
+}
+
+div.container2 {
+ top: 75%;
+ width: 100%;
+ border-radius: 50px 50px 50px 50px;
+}
+
+ div.wrapper {
+  left:50%;
+  width: 100%;
+ }
+
+/* Title */
+#Title h1 {
+ text-align: center;
+ margin: 0 auto;
+ font-size: 10vw;
+}
+
+/* Photo */
+section.Photo {
+ background-image: url("img/FTL-Beach-Park-2023-1.jpg");
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: cover;
+ height: 40vw;
+}
+
+/* Space Availability */
+section.Availability p {
+ text-align: center;
+}
+
+section.Availability p span {
+ font-size: 16vw;
+}
+
+#Icons-Grid {
+ display: grid;
+ justify-content: space-evenly;
+ grid-template-columns: 20% 20% 20% 20% 20%;
+ gap: 5px;
+ padding: 1vw;
+ margin-top: 1em;
+ text-align: center;
+}
+
+/* Address */
+address a {
+ text-decoration: none;
+ font-size: 28pt;
+}
+
+/* Rates */
+.ParkingInfo em {
+ font-size: 20px;
+}
+
+/* Apps Grid */
+.EcoSystem {
+ padding: 1em;
+ margin: -5px;
+ border-radius: 50px;
+}
+
+.EcoSystem div h3 {
+ display: inline;
+}
+
+#Apps-Grid {
+ display: grid;
+ justify-content: space-evenly;
+ grid-template-columns: 50% 50%;
+ gap: 5px;
+ margin-top: 1em;
+ text-align: center;
+}
+
+.App div {
+ align-content: center;
+}
+
+.App div img {
+ width: 32vw;
+}
+
+/* Amenities Table */
+table.Amenities-Icons caption {
+ caption-side: bottom;
+ font-size: 12pt;
+ margin-top: 10px;
+}
+
+table.Amenities-Icons {
+ width: 100%;
+ border-spacing: 2vw;
+}
+
+@media screen and (min-width: 933px) {
+ h1 {
+  font-size: 24pt;
+ }
+
+ h2 {
+  font-size: 19pt;
+ }
+
+ h3 {
+  font-size: 14pt;
+ }
+
+ img.Icons {
+  width: 70px;
+ }
+
+ img.Icons-Small {
+  width: 50px;
+ }
+
+ button a {
+  font-size: 15pt;
+ }
+
+ a.AppButton {
+  font-size: 15pt;
+ }
+
+ div.container {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  width: 350px;
+ }
+ 
+ div.container2 {
+  top: 60px;
+  right: 10px;
+  width: 350px;
+ }
+ 
+ div.wrapper {
+  margin:0 auto;
+  width: 100%;
+ }
+ 
+ #map {
+ position: fixed;
+}
+
+ #Title h1 {
+  font-size: 25pt;
+ }
+
+ section.Photo {
+  height: 200px;
+ }
+
+ section.Availability p span {
+  font-size: 30pt;
+ }
+
+ #Icons-Grid {
+  display: grid;
+  justify-content: space-evenly;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  gap: 5px;
+  padding: 2px;
+  margin-top: 0;
+  text-align: center;
+ }
+
+ address a {
+  font-size: 20pt;
+ }
+
+ #Apps-Grid {
+  display: grid;
+  justify-content: space-evenly;
+  grid-template-columns: 100%;
+  gap: 50px;
+  padding: 0;
+  margin-top: 10px;
+ }
+
+ .App div img {
+  width: 200px;
+ }
+
+ table.Amenities-Icons caption {
+  margin-top: 10px;
+ }
+
+ table.Amenities-Icons {
+  width: 100%;
+  border-spacing: 2px;
+ }
+}

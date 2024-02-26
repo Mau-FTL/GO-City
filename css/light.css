@@ -1,0 +1,83 @@
+/* Firefox */
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: light;
+    }
+}
+
+/* Chrome */
+@media (forced-colors: active) {
+    :root {
+        color-scheme: light;
+    }
+}
+
+/* General */
+body {
+    background-color: #F2F6FD;
+    color: #707577;
+}
+
+h1 {
+    color: #363636;
+}
+
+h2 {
+    color: #053B62;
+}
+
+h3 {
+    color: #053B62;
+}
+
+h4,
+h5,
+h6 {
+    color: #707577;
+}
+
+section {
+    background-color: #F2F6FD;
+    color-scheme: only light;
+}
+
+button {
+    background-color: #ebb55c;
+}
+
+button:hover {
+    background-color: #FFCE7E;
+}
+
+button a {
+    color: #000;
+}
+
+/* Info Panel */
+div.container {
+    background: rgb(5, 59, 98);
+}
+
+/* Title */
+#Title {
+    background-color: #005996;
+}
+
+#Title h1 {
+    color: #fff;
+}
+
+/* Address */
+address a {
+    color: #707577;
+}
+
+/* Apps Grid */
+.EcoSystem {
+    background-color: #005996;
+    color: #fff;
+}
+
+.EcoSystem div h3 {
+    color: #fff;
+}

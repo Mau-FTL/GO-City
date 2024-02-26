@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#053B62" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c1d2b" />
+    <title>Parking Locator</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/light.css">
+    <link rel="stylesheet" href="css/dark.css">
+    <!-- MapBox -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
+    <!-- MapBox GeoCoder -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+    <!-- Payment Links -->
+    <script src="js/DeepLinks.js"></script>
+
+    <style>
+        .geocoder {
+            position: absolute;
+            z-index: 2;
+            width: 100%;
+            top: 15px;
+        }
+
+        .mapboxgl-ctrl-geocoder {
+            border-radius: 50px 50px 50px 50px;
+            min-width: 100%;
+        }
+
+        @media screen and (min-width: 933px) {
+            .geocoder {
+                top: 5px;
+                width: 350px;
+                right: 10px;
+            }
+
+            .mapboxgl-ctrl-geocoder {
+                position: absolute;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Map and Search Bar -->
+    <div id="map"></div>
+    <div id="geocoder" class="geocoder"></div>
+    <!-- Info Panel -->
+    <div id="infoPanel" class="container2" style="display: none;">
+        <!-- Content will be loaded dynamically -->
+
+        <!-- Name of Parking Location -->
+        <section id="Title">
+            <h1>Title</h1>
+        </section>
+        <!-- Image of parking location -->
+        <section class="Photo">
+            <img id="parkingImage" src="/img/PlaceHolder.png">
+        </section>
+        <!-- Available Parking Section and Amenities Icons-->
+        <section class="Availability">
+            <h3>Available Parking Space</h3>
+            <p id="parkingAvailability"><span>High Traffic</span></p>
+        </section>
+        <section>
+            <div id="Icons-Grid">
+                <div><img src="assets/icons/ADA-Parking.svg" class="Icons-Small"></div>
+                <div><img src="assets/icons/24-7.svg" class="Icons-Small"></div>
+                <div><img src="assets/icons/7ft-Tall.svg" class="Icons-Small"></div>
+                <div><img src="assets/icons/EV.svg" class="Icons-Small"></div>
+                <div><img src="assets/icons//Roofcover-Parking.svg" class="Icons-Small"></div>
+            </div>
+        </section>
+        <!-- Address and Direction -->
+        <section id="Address" class="LocationAddress">
+            <h3>Address</h3>
+            <table style="width:100%;">
+                <tr>
+                    <td colspan="3">
+                        <address>
+                            <a href="#" target="_blank">
+                                ADDRESS
+                            </a>
+                        </address>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:30%;"></td>
+                    <td style="width:10%;"></td>
+                    <td style="width:60%;"><br>
+                        <button style="float:right;">
+                            <a href="#" target="_blank">Get Directions</a>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <!-- Available Parking Information -->
+        <section class="ParkingInfo">
+            <div>
+                <h3>Rates</h3>
+                <p></p>
+                <!-- Available Apps -->
+                <div id="EcoSystem" class="EcoSystem">
+                    <div>
+                        <h3>Apps</h3>
+                    </div>
+                    <!-- Available Apps -->
+                    <div id="Apps-Grid">
+                        <div class="App">
+                            <div>
+                                <a href="#EcoSystem" onclick="openPayByPhone()"><img src="assets/icons/PayByPhone-App-Icon.svg" class="Icons"></a>
+                                <p><span class="smalltxt">LOCATION</span><br><span id="PayByPhoneLocation">####</span></p>
+                            </div>
+                            <div>
+                                <button><a href="#EcoSystem" onclick="openPayByPhone()" class="AppButton">PayByPhone</a></button>
+                            </div>
+                        </div>
+                        <div class="App">
+                            <div>
+                                <a href="#EcoSystem" onclick="openParkMobile()"><img src="assets/icons/ParkMobile-App-Icon.svg" class="Icons"></a>
+                                <p><span class="smalltxt">LOCATION</span><br><span id="ParkMobileLocation">####</span></p>
+                            </div>
+                            <div>
+                                <button><a href="#EcoSystem" onclick="openParkMobile()" class="AppButton">ParkMobile</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Amenities Legend -->
+        <section class="Amenities">
+            <table class="Amenities-Icons">
+                <caption>Icon Legend Info</caption>
+                <tr>
+                    <th colspan="2">
+                        <h3>Amenities</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <td style="width:30%;"><img src="assets/icons/ADA-Parking.svg" class="Icons" title="ADA parking is available." alt="ADA Parking Icon">
+                    </td>
+                    <td>ADA Parking</td>
+                </tr>
+                <tr>
+                    <td><img src="assets/icons/24-7.svg" class="Icons" title="24 hour parking is available." alt="24-7 Parking Icon"></td>
+                    <td>24/7 Parking</td>
+                </tr>
+                <tr>
+                    <td><img src="assets/icons/7ft-Tall.svg" class="Icons" title="7 foot clearance is available." alt="7ft Clearance Icon"></td>
+                    <td>7FT Tall Clearance</td>
+                </tr>
+                <tr>
+                    <td><img src="assets/icons/EV.svg" class="Icons" title="Electric charging is available." alt="Electric Vehicle Charging Icon"></td>
+                    <td>Electric Charging</td>
+                </tr>
+                <tr>
+                    <td><img src="assets/icons/Roofcover-Parking.svg" class="Icons" title="Parking has roof covering." alt="Roofcovering Parking Icon"></td>
+                    <td>Roof Covering</td>
+                </tr>
+            </table>
+        </section>
+        <p style="text-align: center;color: white;font-size: 12pt;">Design by <a href="https://www.fortlauderdale.gov/tam" style="text-decoration:none; text-align: center;color: white;font-size: 12pt;">City of Fort Lauderdale</a></p>
+    </div>
+
+    <script>
+        const ACCESS_TOKEN = 'pk.eyJ1IjoibWF1cmljaW9iYXF1ZXJvIiwiYSI6ImNscHNrZDd6aDA0NzcyaXJ6OTJiODVkMXYifQ.Sxnc-50cCwIwe1Om58AHQA';
+        mapboxgl.accessToken = ACCESS_TOKEN;
+        // Mapbox styles
+        const lightStyle = 'mapbox://styles/mauriciobaquero/clnyraews008601o3gli891bh';
+        const darkStyle = 'mapbox://styles/mauriciobaquero/clq6dkd27001701pd1atpd4me';
+        // Check if dark mode is set
+        const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const mapStyle = isDarkMode ? darkStyle : lightStyle;
+        // Mapbox styles
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: mapStyle, // Use the determined map style based on theme preference
+            center: [-80.1436755614412, 26.1184574886589],
+            zoom: 16.5,
+            pitch: 45
+        });
+        // Optional: Add an event listener to change the map style if the user changes their color scheme preference
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            const newStyle = e.matches ? darkStyle : lightStyle;
+            map.setStyle(newStyle);
+        });
+        // Add the control to the map.
+        const geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+        });
+        document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+        //Map Interactions
+        map.on('click', (event) => {
+            const features = map.queryRenderedFeatures(event.point, {
+                layers: ['ftl-parking'] // Replace with your layer name
+            });
+            const infoPanel = document.getElementById('infoPanel');
+            if (features.length) {
+                const feature = features[0];
+                // Update the title, address, and rates in the infoPanel
+                // Make sure to match feature properties with these variables
+                const titleElement = infoPanel.querySelector('#Title h1');
+                const addressElement = infoPanel.querySelector('#Address address a');
+                const directionButton = infoPanel.querySelector('#Address button a');
+                const ratesElement = infoPanel.querySelector('.ParkingInfo p');
+                const payByPhoneLocationElement = infoPanel.querySelector('#PayByPhoneLocation');
+                const address = feature.properties.Address;
+                const latitude = feature.geometry.coordinates[1];
+                const longitude = feature.geometry.coordinates[0];
+                const mapLink = `http://maps.apple.com/?q=${latitude},${longitude}`;
+                const rate = feature.properties.Rate;
+                const maxTime = feature.properties.MaxTime;
+                const openTime = feature.properties.OpenTime;
+                const noParking = feature.properties.NoParking;
+                const residentRate = rate / 2;
+                // Title
+                if (titleElement && feature.properties.Title) {
+                    titleElement.textContent = feature.properties.Title;
+                }
+                // Update the image source
+                if (feature.properties.Title === 'Fort Lauderdale Beach Parking' || feature.properties.Title === 'Las Olas Garage') {
+                    parkingImage.src = `/img/${feature.properties.Title}.jpg`;
+                } else {
+                    parkingImage.src = '/img/PlaceHolder.png';
+                }
+                // Address
+                if (addressElement && directionButton) {
+                    addressElement.textContent = address;
+                    addressElement.href = mapLink;
+                    directionButton.href = mapLink;
+                }
+                // Rates
+                if (ratesElement) {
+                    ratesElement.innerHTML = `$${rate} an hour<br><hr>Max Stay ${maxTime}<br><hr>Open ${openTime}<br><hr>No Parking: ${noParking}<br><hr>Exact Payment Only. No Cash. No Refund.<br><hr><em>Resident rate available only on PayByPhone: $${residentRate} per hour</em>`;
+                }
+                // Update PayByPhoneLocation element with dataset title
+                if (payByPhoneLocationElement) {
+                payByPhoneLocationElement.textContent = feature.properties.PayByPhone; // PayByPhone Location Number
+                }
+                // Display the infoPanel
+                infoPanel.style.display = 'block';
+                } else {
+                // Hide the infoPanel when the map is clicked but not on a feature
+                infoPanel.style.display = 'none';
+            }
+        });
+        // Example of Parking Availablity
+        let currentNumber = 15; // Starting number, can be set to any initial value
+        function updateParkingAvailability() {
+            // Randomly decide to add or subtract 1
+            const change = Math.random() < 0.5 ? -1 : 1;
+            // Update the current number
+            currentNumber += change;
+            // Ensure the number stays within the 1 to 80 range
+            if (currentNumber < 1) currentNumber = 1;
+            if (currentNumber > 80) currentNumber = 80;
+            // Update the content of the element
+            document.getElementById("parkingAvailability").innerHTML = `<span>${currentNumber}</span>`;
+        }
+        // Call updateParkingAvailability every 3 seconds (3000 milliseconds)
+        setInterval(updateParkingAvailability, 3000);
+        // Set the initial content
+        document.getElementById("parkingAvailability").innerHTML = `<span>${currentNumber}</span>`;
+    </script>
+</body>
+
+</html>

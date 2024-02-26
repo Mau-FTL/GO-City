@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Intro</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+	<link rel="stylesheet" href="css/light.css">
+	<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet">
+	<script src="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js"></script>
+	<style>
+		body {
+			padding: 0;
+			overflow-x: hidden;
+			margin: 0 auto;
+			font-size: 16pt;
+			font-family: "Josefin Sans", sans-serif;
+		}
+
+		#map {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<style>
+		#map {
+			position: fixed;
+			width: 70%;
+		}
+
+		#features {
+			width: 30%;
+			margin-left: 70%;
+			font-family: sans-serif;
+			background-color: #fafafa;
+		}
+
+		h1 {
+			line-height: 40px;
+			font-size: 28pt;
+		}
+
+		section.intro {
+			position: relative;
+			padding: 25px 50px;
+			margin: 200px 0px;
+			line-height: 30px;
+			border-bottom: 1px solid #ddd;
+			opacity: 0.25;
+			font-size: 14pt;
+		}
+
+		section.intro:not(:last-of-type)::after {
+			content: '⬇';
+			/* Unicode arrow down */
+			display: inline-block;
+			margin-left: 10px;
+			/* Space between the paragraph text and the arrow */
+			font-size: 18px;
+			/* Adjust size as needed */
+			color: #000;
+			/* Adjust color as needed */
+		}
+
+		section.intro.active {
+			opacity: 1;
+		}
+
+		section.intro:last-child {
+			border-bottom: none;
+			margin-bottom: 200px;
+		}
+
+		footer {
+			padding: 10px 50px;
+			margin: 0 auto;
+			font-size: 11pt;
+			text-align: center;
+			position: relative;
+			bottom: 0px;
+		}
+
+		/* Parking Locator Tiles */
+		h1 {
+			font-size: 28pt;
+		}
+
+		h2 {
+			font-size: 22pt;
+		}
+
+		h3 {
+			font-size: 20pt;
+		}
+
+		p {
+			font-family: "Roboto", sans-serif;
+		}
+
+		section.Sample {
+			padding: 1em;
+			margin: 0.3em;
+			border-radius: 50px;
+		}
+
+		button {
+			border: none;
+			border-radius: 25px;
+			padding: 10px;
+		}
+
+		button a {
+			text-decoration: none;
+			font-size: 15pt;
+		}
+
+		a.AppButton {
+			font-size: 10pt;
+		}
+
+		div.container2 {
+			width: 100%;
+			border-radius: 50px;
+			padding: .3em;
+		}
+
+		/* Photo */
+		.Photo {
+			overflow: hidden;
+			/* Ensures the image does not spill out of the rounded corners */
+			padding: 0 !important;
+			/* Remove padding to allow the image to fill the entire section */
+			height: 350px;
+		}
+
+		.Photo img {
+			width: 100%;
+			height: 100%;
+			top: 50%;
+			Left: 50%;
+			object-fit: cover;
+			/* Maintain aspect ratio and cover the entire section */
+		}
+
+		section.Photo {
+			height: 200px;
+		}
+
+		/* Space Availability */
+		section.Availability p {
+			text-align: center;
+		}
+
+		section.Availability p span {
+			font-size: 30pt;
+		}
+
+		#Icons-Grid {
+			display: grid;
+			justify-content: space-evenly;
+			grid-template-columns: 20% 20% 20% 20% 20%;
+			gap: 5px;
+			padding: 1vw;
+			margin-top: 0;
+			text-align: center;
+		}
+
+		/* Address */
+		address a {
+			text-decoration: none;
+			font-size: 28pt;
+		}
+
+		/* Rates */
+		.ParkingInfo em {
+			font-size: 20px;
+		}
+
+		/* Apps Grid */
+		.EcoSystem {
+			padding: 1em;
+			margin: -5px;
+			border-radius: 50px;
+		}
+
+		.EcoSystem div h3 {
+			display: inline;
+		}
+
+		#Apps-Grid {
+			display: grid;
+			justify-content: space-evenly;
+			text-align: center;
+			grid-template-columns: 50% 50%;
+			gap: 5px;
+			padding: 0;
+			margin-top: 10px;
+		}
+
+		.App div {
+			align-content: center;
+			width: 200px;
+		}
+
+		.App div img {
+			width: 150px;
+		}
+
+		.App div p {
+			font-size: 32pt;
+			line-height: 60%;
+			margin-top: 0px;
+		}
+
+		p span.smalltxt {
+			font-size: 9pt;
+		}
+	</style>
+
+	<script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
+	<script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+
+	<div id="map"></div>
+	<div id="features">
+		<section id="intro" class="active intro">
+			<h1>👋 Welcome</h1>
+			<p>Fort Lauderdale is vibrant with rich experiences, reflected in its food, art, music, and festivals. Let’s look at some of Fort Lauderdale’s hidden gems and help you find parking along the way.</p>
+		</section>
+		<section id="gem1" class="intro">
+			<h1>💎 Society Las Olas</h1>
+			<p>"Thrive", an enduring public art piece by Daniel Popper, features a towering 30-foot, 14-ton sculpture of a giant unveiling its chest to disclose a verdant interior adorned with ferns, complete with a walkthrough archway. Popper's artistic signature lies in his creation of large-scale, captivating installations, often embellished with projection mapping for a heightened visual experience.</p>
+		</section>
+		<section id="ex1" class="intro">
+			<h1>🧭 Convenient Parking Info</h1>
+			<p>You can easily spot public parking nearby. With a simple tap, you can access real-time availability and parking amenities.</p>
+			<p id="actionText" style="display:block;">Tap on a parking pin!</p>
+			<div id="infoPanel" class="container2" style="display:none;">
+				<!-- Image of parking location -->
+				<section class="Photo Sample">
+					<img id="parkingImage" src="/img/PlaceHolder.png">
+				</section>
+				<!-- Available Parking Section and Amenities Icons-->
+				<section class="Availability Sample">
+					<h3>Available Parking Space</h3>
+					<p id="parkingAvailability"><span>High Traffic</span></p>
+				</section>
+				<section class="Sample">
+					<div id="Icons-Grid">
+						<div><img src="assets/icons/ADA-Parking.svg" class="Icons-Small"></div>
+						<div><img src="assets/icons/24-7.svg" class="Icons-Small"></div>
+						<div><img src="assets/icons/7ft-Tall.svg" class="Icons-Small"></div>
+						<div><img src="assets/icons/EV.svg" class="Icons-Small"></div>
+						<div><img src="assets/icons//Roofcover-Parking.svg" class="Icons-Small"></div>
+					</div>
+				</section>
+			</div>
+		</section>
+		<section id="gem2" class="intro">
+			<h1>💎 Fort Lauderdale Aquatic Center</h1>
+			<p>Featuring one of the globe's tallest dive platforms, the 27-meter structure stands as a testament to both professional and emerging swimming talents. For decades, this facility has been a foundational part of South Florida's community, attracting local enthusiasts, international guests, and gold medal winners alike. The distinctive dive tower, inspired by the hull of a ship, accommodates a variety of diving disciplines, including springboard, platform, and high diving.</p>
+		</section>
+		<section id="ex2" class="intro">
+			<h1>🧭 Effortless Payment Options</h1>
+			<p>In Fort Lauderdale, paying for parking is a breeze. The city supports multiple payment apps, eliminating the need for a single dedicated app. Scroll down to 'Rates' to select your preferred payment method.</p>
+			<p id="actionText" style="display:block;">Tap on a parking pin!</p>
+			<div id="infoPanel" class="container2" style="display:none;">
+				<!-- Available Parking Information -->
+				<section class="ParkingInfo  Sample">
+					<h3>Rates</h3>
+					<p></p>
+					<!-- Available Apps -->
+					<div id="EcoSystem" class="EcoSystem">
+						<div>
+							<h3>Apps</h3>
+						</div>
+						<!-- Available Apps -->
+						<div id="Apps-Grid">
+							<div class="App">
+								<div>
+									<a href="#EcoSystem" onclick="openPayByPhone()"><img src="assets/icons/PayByPhone-App-Icon.svg" class="Icons"></a>
+									<p><span class="smalltxt">LOCATION</span><br>8800</p>
+								</div>
+								<div>
+									<button><a href="#EcoSystem" onclick="openPayByPhone()" class="AppButton">PayByPhone</a></button>
+								</div>
+							</div>
+							<div class="App">
+								<div>
+									<a href="#EcoSystem" onclick="openParkMobile()"><img src="assets/icons/ParkMobile-App-Icon.svg" class="Icons"></a>
+									<p><span class="smalltxt">LOCATION</span><br>1632</p>
+								</div>
+								<div>
+									<button><a href="#EcoSystem" onclick="openParkMobile()" class="AppButton">ParkMobile</a></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</section>
+		<section id="ex3" class="intro">
+			<h1>🧭 QR Code for Parking Payment</h1>
+			<img src="/assets/ParkingSign.svg">
+			<p>Every City parking facility has signs to scan a QR code for payment. If you have a preferred app installed, simply enter the location number to complete your transaction.</p>
+		</section>
+		<section id="outro" class="intro" style="margin-bottom: 0px;">
+			<h1>Discover Parking and Explore Fort Lauderdale
+				with Parking Locator</h1>
+			<button><a href="index.html">Let's Go</a></button> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</section>
+		<footer>
+			<p>Made with ❤️ from City of Fort Lauderdale.</p>
+		</footer>
+	</div>
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoibWF1cmljaW9iYXF1ZXJvIiwiYSI6ImNscHNrZDd6aDA0NzcyaXJ6OTJiODVkMXYifQ.Sxnc-50cCwIwe1Om58AHQA';
+		// Mapbox styles
+		const lightStyle = 'mapbox://styles/mauriciobaquero/clnyraews008601o3gli891bh';
+		const darkStyle = 'mapbox://styles/mauriciobaquero/clq6dkd27001701pd1atpd4me';
+		// Check if dark mode is set
+		const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const mapStyle = isDarkMode ? darkStyle : lightStyle;
+		// Map initialization with style based on theme preference
+		const map = new mapboxgl.Map({
+			container: 'map',
+			style: mapStyle,
+			center: [-80.1436755614412, 26.1184574886589],
+			zoom: 16.5,
+			pitch: 45
+		});
+		// Optional: Add an event listener to change the map style if the user changes their color scheme preference
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+			const newStyle = e.matches ? darkStyle : lightStyle;
+			map.setStyle(newStyle);
+		});
+		// Your existing chapters, setActiveChapter, and isElementOnScreen functions
+		const chapters = {
+			'intro': {
+				center: [-80.1436755614412, 26.1184574886589],
+				zoom: 16.5,
+				bearing: 0,
+				pitch: 45
+			},
+			'gem1': {
+				center: [-80.144577, 26.119311],
+				zoom: 20,
+				bearing: 188,
+				pitch: 45,
+				speed: 0.5
+			},
+			'ex1': {
+				center: [-80.144577, 26.119311],
+				zoom: 16,
+				bearing: 0,
+				pitch: 0,
+				speed: 0.5
+			},
+			'gem2': {
+				center: [-80.10695493868242, 26.116162232435215],
+				zoom: 19,
+				bearing: 120,
+				pitch: 60,
+				speed: 0.6
+			},
+			'ex2': {
+				center: [-80.106083, 26.116234],
+				zoom: 15.7,
+				bearing: 0,
+				pitch: 45,
+				speed: 0.6
+			},
+			'ex3': {
+				center: [-80.106083, 26.116234],
+				zoom: 15.7,
+				bearing: 0,
+				pitch: 45,
+				speed: 0.6
+			},
+			'outro': {
+				center: [-80.1436755614412, 26.1184574886589],
+				zoom: 17,
+				bearing: 0,
+				pitch: 45,
+				speed: 0.2
+			}
+		};
+		let activeChapterName = 'intro';
+
+		function setActiveChapter(chapterName) {
+			if (chapterName === activeChapterName) return;
+			map.flyTo(chapters[chapterName]);
+			document.getElementById(chapterName).classList.add('active');
+			document.getElementById(activeChapterName).classList.remove('active');
+			activeChapterName = chapterName;
+		}
+
+		function isElementOnScreen(id) {
+			const element = document.getElementById(id);
+			const bounds = element.getBoundingClientRect();
+			return bounds.top < window.innerHeight && bounds.bottom > 0;
+		}
+		window.onscroll = () => {
+			for (const chapterName in chapters) {
+				if (isElementOnScreen(chapterName)) {
+					setActiveChapter(chapterName);
+					break;
+				}
+			}
+		};
+		// New functionality for map click interaction
+		map.on('click', (event) => {
+			const features = map.queryRenderedFeatures(event.point, {
+				layers: ['ftl-parking'] // Replace with your layer name
+			});
+			const infoPanel = document.getElementById('infoPanel');
+			const actionText = document.getElementById('actionText');
+			const ratesElement = document.getElementById('parkingRates');
+			if (features.length) {
+				const feature = features[0];
+				// 
+				const rate = feature.properties.Rate;
+				const maxTime = feature.properties.MaxTime;
+				const openTime = feature.properties.OpenTime;
+				const noParking = feature.properties.NoParking;
+				// Update the image source
+				if (feature.properties.Title === 'Fort Lauderdale Beach Parking' || feature.properties.Title === 'Las Olas Garage') {
+					parkingImage.src = `/img/${feature.properties.Title}.jpg`;
+				} else {
+					parkingImage.src = '/img/PlaceHolder.png';
+				}
+				// Rates
+				if (ratesElement) {
+					ratesElement.innerHTML = `${rate} an hour<br><hr>Max Stay ${maxTime}<br><hr>Open ${openTime}<br><hr>No Parking: ${noParking}<br><hr>Exact Payment Only. No Cash. No Refund.<br><hr><em>*Resident rates available only on PayByPhone</em>`;
+				}
+				// Display the infoPanel and hide the actionText
+				infoPanel.style.display = 'block';
+				actionText.style.display = 'none';
+			} else {
+				// Hide the infoPanel and show the actionText
+				infoPanel.style.display = 'none';
+				actionText.style.display = 'block';
+			}
+		});
+		
+		// Place holderr of Parking Availablity working on retrieving the data from vendor
+		let currentNumber = 15; // Starting number, can be set to any initial value
+		function updateParkingAvailability() {
+			// Randomly decide to add or subtract 1
+			const change = Math.random() < 0.5 ? -1 : 1;
+			// Update the current number
+			currentNumber += change;
+			// Ensure the number stays within the 1 to 80 range
+			if (currentNumber < 1) currentNumber = 1;
+			if (currentNumber > 80) currentNumber = 80;
+			// Update the content of the element
+			document.getElementById("parkingAvailability").innerHTML = `<span>${currentNumber}</span>`;
+		}
+		// Call updateParkingAvailability every 3 seconds (3000 milliseconds)
+		setInterval(updateParkingAvailability, 3000);
+		// Set the initial content
+		document.getElementById("parkingAvailability").innerHTML = `<span>${currentNumber}</span>`;
+		// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin = [-80.10695493868242, 26.116162232435215];
+		const modelAltitude = 0;
+		const modelRotate = [Math.PI / 2, 0, 0];
+		const modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+			modelOrigin,
+			modelAltitude
+		);
+		// transformation parameters to position, rotate and scale the 3D model onto the map
+		const modelTransform = {
+			translateX: modelAsMercatorCoordinate.x,
+			translateY: modelAsMercatorCoordinate.y,
+			translateZ: modelAsMercatorCoordinate.z,
+			rotateX: modelRotate[0],
+			rotateY: modelRotate[1],
+			rotateZ: modelRotate[2],
+			/* Since the 3D model is in real world meters, a scale transform needs to be
+			applied since the CustomLayerInterface expects units in MercatorCoordinates.*/
+			
+			scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+		};
+		const THREE = window.THREE;
+		// configuration of the custom layer for a 3D model per the CustomLayerInterface
+		const customLayer = {
+			id: '3d-model',
+			type: 'custom',
+			renderingMode: '3d',
+			onAdd: function(map, gl) {
+				this.camera = new THREE.Camera();
+				this.scene = new THREE.Scene();
+				// create two three.js lights to illuminate the model
+				const directionalLight = new THREE.DirectionalLight(0xffffff);
+				directionalLight.position.set(0, -70, 100).normalize();
+				this.scene.add(directionalLight);
+				const directionalLight2 = new THREE.DirectionalLight(0xffffff);
+				directionalLight2.position.set(0, 70, 100).normalize();
+				this.scene.add(directionalLight2);
+				// use the three.js GLTF loader to add the 3D model to the three.js scene
+				const loader = new THREE.GLTFLoader();
+				loader.load(
+					'/assets/DiveTower.glb',
+					(gltf) => {
+						this.scene.add(gltf.scene);
+					}
+				);
+				this.map = map;
+				// use the Mapbox GL JS map canvas for three.js
+				this.renderer = new THREE.WebGLRenderer({
+					canvas: map.getCanvas(),
+					context: gl,
+					antialias: true
+				});
+				this.renderer.autoClear = false;
+			},
+			render: function(gl, matrix) {
+				const rotationX = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3(1, 0, 0),
+					modelTransform.rotateX
+				);
+				const rotationY = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3(0, 1, 0),
+					modelTransform.rotateY
+				);
+				const rotationZ = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3(0, 0, 1),
+					modelTransform.rotateZ
+				);
+				const m = new THREE.Matrix4().fromArray(matrix);
+				const l = new THREE.Matrix4()
+					.makeTranslation(
+						modelTransform.translateX,
+						modelTransform.translateY,
+						modelTransform.translateZ
+					)
+					.scale(
+						new THREE.Vector3(
+							modelTransform.scale,
+							-modelTransform.scale,
+							modelTransform.scale
+						)
+					)
+					.multiply(rotationX)
+					.multiply(rotationY)
+					.multiply(rotationZ);
+				this.camera.projectionMatrix = m.multiply(l);
+				this.renderer.resetState();
+				this.renderer.render(this.scene, this.camera);
+				this.map.triggerRepaint();
+			}
+		};
+		map.on('style.load', () => {
+			map.addLayer(customLayer, 'waterway-label');
+		});
+	</script>
+
+</body>
+
+</html>
