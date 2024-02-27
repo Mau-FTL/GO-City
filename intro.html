@@ -60,9 +60,7 @@
 			margin-left: 10px;
 			/* Space between the paragraph text and the arrow */
 			font-size: 18px;
-			/* Adjust size as needed */
 			color: #000;
-			/* Adjust color as needed */
 		}
 
 		section.intro.active {
@@ -125,6 +123,13 @@
 			width: 100%;
 			border-radius: 50px;
 			padding: .3em;
+		}
+
+		/* Title */
+		#Title h1 {
+			text-align: center;
+			margin: 0 auto;
+			font-size: 10vw;
 		}
 
 		/* Photo */
@@ -243,14 +248,18 @@
 			<p id="actionText" style="display:block;">Tap on a parking pin!</p>
 			<!-- First Info Panel-->
 			<div id="infoPanel" class="container2" style="display:none;">
-				<!-- Image of parking location -->
+				<!-- Name of Parking Location -->
+				<section id="Title">
+					<h1>Title</h1>
+				</section>
+				<!-- Image of Location -->
 				<section class="Photo Sample">
 					<img id="parkingImage" src="/img/PlaceHolder.png">
 				</section>
 				<!-- Available Parking Section and Amenities Icons-->
 				<section class="Availability Sample">
 					<h3>Available Parking Space</h3>
-					<p id="parkingAvailability"><span>High Traffic</span></p>
+					<p id="parkingAvailability"><span>####</span></p>
 				</section>
 				<section class="Sample">
 					<div id="Icons-Grid">
@@ -318,7 +327,7 @@
 		</section>
 		<section id="ex3" class="intro">
 			<h1>🧭 QR Code for Parking Payment</h1>
-			<img src="/assets/ParkingSign.svg">
+			<img src="/assets/ParkingSign.svg" width="200px">
 			<p>Every City parking facility has signs to scan a QR code for payment. If you have a preferred app
 				installed, simply enter the location number to complete your transaction.</p>
 		</section>
@@ -326,7 +335,7 @@
 			<h1>Discover Parking and Explore Fort Lauderdale
 				with Parking Locator</h1>
 			<button><a href="index.html">Let's Go</a></button>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</section>
 		<footer>
 			<p>Made with ❤️ from City of Fort Lauderdale.</p>
