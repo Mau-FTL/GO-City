@@ -50,7 +50,7 @@
 			line-height: 30px;
 			opacity: 0.25;
 			font-size: 14pt;
-			scroll-snap-align: start;
+			scroll-snap-align: start end;
 		}
 
 		section.intro:not(:last-of-type)::after {
@@ -554,9 +554,6 @@
 				this.map.triggerRepaint();
 			}
 		};
-		map.on('style.load', () => {
-			map.addLayer(customLayer, 'waterway-label');
-		});
 	</script>
 
 </body>
