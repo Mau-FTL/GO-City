@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="css/light.css">
 	<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet">
 	<script src="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js"></script>
+	<script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
+	<script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
 	<style>
 		/* Add the following CSS to enable scroll snapping */
 		html {
@@ -23,19 +25,10 @@
 		}
 
 		#map {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			width: 100%;
-		}
-	</style>
-</head>
-
-<body>
-	<style>
-		#map {
 			position: fixed;
 			width: 70%;
+			top: 0;
+			bottom: 0;
 		}
 
 		#features {
@@ -226,10 +219,9 @@
 			font-size: 9pt;
 		}
 	</style>
+</head>
 
-	<script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
-	<script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
-
+<body>
 	<div id="map"></div>
 	<div id="features">
 		<section id="intro" class="active intro">
