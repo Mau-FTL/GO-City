@@ -427,11 +427,16 @@
 			const ratesElement = document.getElementById('parkingRates');
 			if (features.length) {
 				const feature = features[0];
-				// 
+				// Update the title, address, and rates in the infoPanel
+				const titleElement = infoPanel.querySelector('#Title h1');
 				const rate = feature.properties.Rate;
 				const maxTime = feature.properties.MaxTime;
 				const openTime = feature.properties.OpenTime;
 				const noParking = feature.properties.NoParking;
+				// Title
+				if (titleElement && feature.properties.Title) {
+					titleElement.textContent = feature.properties.Title;
+				}
 				// Update the image source
 				if (feature.properties.Title === 'Fort Lauderdale Beach Parking' || feature.properties.Title === 'Las Olas Garage') {
 					parkingImage.src = `/img/${feature.properties.Title}.jpg`;
