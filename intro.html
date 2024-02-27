@@ -126,10 +126,10 @@
 		}
 
 		/* Title */
-		#Title h1 {
+		.Title h1 {
 			text-align: center;
 			margin: 0 auto;
-			font-size: 10vw;
+			font-size: 2vw;
 		}
 
 		/* Photo */
@@ -161,16 +161,6 @@
 
 		section.Availability p span {
 			font-size: 30pt;
-		}
-
-		#Icons-Grid {
-			display: grid;
-			justify-content: space-evenly;
-			grid-template-columns: 20% 20% 20% 20% 20%;
-			gap: 5px;
-			padding: 1vw;
-			margin-top: 0;
-			text-align: center;
 		}
 
 		/* Address */
@@ -249,7 +239,7 @@
 			<!-- First Info Panel-->
 			<div id="infoPanel" class="container2" style="display:none;">
 				<!-- Name of Parking Location -->
-				<section id="Title">
+				<section class="Title Sample">
 					<h1>Title</h1>
 				</section>
 				<!-- Image of Location -->
@@ -261,85 +251,77 @@
 					<h3>Available Parking Space</h3>
 					<p id="parkingAvailability"><span>####</span></p>
 				</section>
-				<section class="Sample">
-					<div id="Icons-Grid">
-						<div><img src="assets/icons/ADA-Parking.svg" class="Icons-Small"></div>
-						<div><img src="assets/icons/24-7.svg" class="Icons-Small"></div>
-						<div><img src="assets/icons/7ft-Tall.svg" class="Icons-Small"></div>
-						<div><img src="assets/icons/EV.svg" class="Icons-Small"></div>
-						<div><img src="assets/icons//Roofcover-Parking.svg" class="Icons-Small"></div>
+				<!-- End of First Info Panel-->
+		</section>
+	</div>
+	</section>
+	<section id="gem2" class="intro">
+		<h1>💎 Fort Lauderdale Aquatic Center</h1>
+		<p>Featuring one of the globe's tallest dive platforms, the 27-meter structure stands as a testament to both
+			professional and emerging swimming talents. For decades, this facility has been a foundational part of
+			South Florida's community, attracting local enthusiasts, international guests, and gold medal winners
+			alike. The distinctive dive tower, inspired by the hull of a ship, accommodates a variety of diving
+			disciplines, including springboard, platform, and high diving.</p>
+	</section>
+	<section id="ex2" class="intro">
+		<h1>🧭 Effortless Payment Options</h1>
+		<p>In Fort Lauderdale, paying for parking is a breeze. The city supports multiple payment apps, eliminating
+			the need for a single dedicated app. Scroll down to 'Rates' to select your preferred payment method.</p>
+		<p id="actionText" style="display:block;">Tap on a parking pin!</p>
+		<div id="infoPanel" class="container2" style="display:none;">
+			<!-- Available Parking Information -->
+			<section class="ParkingInfo  Sample">
+				<h3>Rates</h3>
+				<p></p>
+				<!-- Available Apps -->
+				<div id="EcoSystem" class="EcoSystem">
+					<div>
+						<h3>Apps</h3>
 					</div>
-					<!-- End of First Info Panel-->
-				</section>
-			</div>
-		</section>
-		<section id="gem2" class="intro">
-			<h1>💎 Fort Lauderdale Aquatic Center</h1>
-			<p>Featuring one of the globe's tallest dive platforms, the 27-meter structure stands as a testament to both
-				professional and emerging swimming talents. For decades, this facility has been a foundational part of
-				South Florida's community, attracting local enthusiasts, international guests, and gold medal winners
-				alike. The distinctive dive tower, inspired by the hull of a ship, accommodates a variety of diving
-				disciplines, including springboard, platform, and high diving.</p>
-		</section>
-		<section id="ex2" class="intro">
-			<h1>🧭 Effortless Payment Options</h1>
-			<p>In Fort Lauderdale, paying for parking is a breeze. The city supports multiple payment apps, eliminating
-				the need for a single dedicated app. Scroll down to 'Rates' to select your preferred payment method.</p>
-			<p id="actionText" style="display:block;">Tap on a parking pin!</p>
-			<div id="infoPanel" class="container2" style="display:none;">
-				<!-- Available Parking Information -->
-				<section class="ParkingInfo  Sample">
-					<h3>Rates</h3>
-					<p></p>
 					<!-- Available Apps -->
-					<div id="EcoSystem" class="EcoSystem">
-						<div>
-							<h3>Apps</h3>
-						</div>
-						<!-- Available Apps -->
-						<div id="Apps-Grid">
-							<div class="App">
-								<div>
-									<a href="#EcoSystem" onclick="openPayByPhone()"><img
-											src="assets/icons/PayByPhone-App-Icon.svg" class="Icons"></a>
-									<p><span class="smalltxt">LOCATION</span><br>8800</p>
-								</div>
-								<div>
-									<button><a href="#EcoSystem" onclick="openPayByPhone()"
-											class="AppButton">PayByPhone</a></button>
-								</div>
+					<div id="Apps-Grid">
+						<div class="App">
+							<div>
+								<a href="#EcoSystem" onclick="openPayByPhone()"><img
+										src="assets/icons/PayByPhone-App-Icon.svg" class="Icons"></a>
+								<p><span class="smalltxt">LOCATION</span><br>8800</p>
 							</div>
-							<div class="App">
-								<div>
-									<a href="#EcoSystem" onclick="openParkMobile()"><img
-											src="assets/icons/ParkMobile-App-Icon.svg" class="Icons"></a>
-									<p><span class="smalltxt">LOCATION</span><br>1632</p>
-								</div>
-								<div>
-									<button><a href="#EcoSystem" onclick="openParkMobile()"
-											class="AppButton">ParkMobile</a></button>
-								</div>
+							<div>
+								<button><a href="#EcoSystem" onclick="openPayByPhone()"
+										class="AppButton">PayByPhone</a></button>
+							</div>
+						</div>
+						<div class="App">
+							<div>
+								<a href="#EcoSystem" onclick="openParkMobile()"><img
+										src="assets/icons/ParkMobile-App-Icon.svg" class="Icons"></a>
+								<p><span class="smalltxt">LOCATION</span><br>1632</p>
+							</div>
+							<div>
+								<button><a href="#EcoSystem" onclick="openParkMobile()"
+										class="AppButton">ParkMobile</a></button>
 							</div>
 						</div>
 					</div>
-				</section>
-			</div>
-		</section>
-		<section id="ex3" class="intro">
-			<h1>🧭 QR Code for Parking Payment</h1>
-			<img src="/assets/ParkingSign.svg" width="200px">
-			<p>Every City parking facility has signs to scan a QR code for payment. If you have a preferred app
-				installed, simply enter the location number to complete your transaction.</p>
-		</section>
-		<section id="outro" class="intro" style="margin-bottom: 0px;">
-			<h1>Discover Parking and Explore Fort Lauderdale
-				with Parking Locator</h1>
-			<button><a href="index.html">Let's Go</a></button>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		</section>
-		<footer>
-			<p>Made with ❤️ from City of Fort Lauderdale.</p>
-		</footer>
+				</div>
+			</section>
+		</div>
+	</section>
+	<section id="ex3" class="intro">
+		<h1>🧭 QR Code for Parking Payment</h1>
+		<img src="/assets/ParkingSign.svg" width="200px">
+		<p>Every City parking facility has signs to scan a QR code for payment. If you have a preferred app
+			installed, simply enter the location number to complete your transaction.</p>
+	</section>
+	<section id="outro" class="intro" style="margin-bottom: 0px;">
+		<h1>Discover Parking and Explore Fort Lauderdale
+			with Parking Locator</h1>
+		<button><a href="index.html">Let's Go</a></button>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	</section>
+	<footer>
+		<p>Made with ❤️ from City of Fort Lauderdale.</p>
+	</footer>
 	</div>
 	<script>
 		mapboxgl.accessToken = 'pk.eyJ1IjoibWF1cmljaW9iYXF1ZXJvIiwiYSI6ImNscHNrZDd6aDA0NzcyaXJ6OTJiODVkMXYifQ.Sxnc-50cCwIwe1Om58AHQA';
