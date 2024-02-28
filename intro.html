@@ -45,7 +45,7 @@
 			margin: 0px;
 			line-height: 30px;
 			font-size: 14pt;
-
+			border-bottom: 1px solid #000;
 		}
 
 		section.intro:not(:last-of-type)::after {
@@ -56,7 +56,6 @@
 			/* Space between the paragraph text and the arrow */
 			font-size: 18px;
 			color: #000;
-			border-bottom: solid 1px #000;
 		}
 
 		section.intro.active {}
@@ -549,6 +548,10 @@
 				this.map.triggerRepaint();
 			}
 		};
+
+		map.on('load', () => {
+			map.addLayer(customLayer, 'waterway-label');
+		});
 	</script>
 
 </body>
