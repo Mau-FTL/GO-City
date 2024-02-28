@@ -17,8 +17,11 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
     <!-- MapBox GeoCoder -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+        type="text/css">
     <!-- Payment Links -->
     <script src="js/DeepLinks.js"></script>
 
@@ -61,7 +64,7 @@
         <section id="Title">
             <h1>Title</h1>
         </section>
-        <!-- Image of parking location -->
+        <!-- Image of Location -->
         <section class="Photo">
             <img id="parkingImage" src="/img/PlaceHolder.png">
         </section>
@@ -117,20 +120,26 @@
                     <div id="Apps-Grid">
                         <div class="App">
                             <div>
-                                <a href="#EcoSystem" onclick="openPayByPhone()"><img src="assets/icons/PayByPhone-App-Icon.svg" class="Icons"></a>
-                                <p><span class="smalltxt">LOCATION</span><br><span id="PayByPhoneLocation">####</span></p>
+                                <a href="#EcoSystem" onclick="openPayByPhone()"><img
+                                        src="assets/icons/PayByPhone-App-Icon.svg" class="Icons"></a>
+                                <p><span class="smalltxt">LOCATION</span><br><span id="PayByPhoneLocation">####</span>
+                                </p>
                             </div>
                             <div>
-                                <button><a href="#EcoSystem" onclick="openPayByPhone()" class="AppButton">PayByPhone</a></button>
+                                <button><a href="#EcoSystem" onclick="openPayByPhone()"
+                                        class="AppButton">PayByPhone</a></button>
                             </div>
                         </div>
                         <div class="App">
                             <div>
-                                <a href="#EcoSystem" onclick="openParkMobile()"><img src="assets/icons/ParkMobile-App-Icon.svg" class="Icons"></a>
-                                <p><span class="smalltxt">LOCATION</span><br><span id="ParkMobileLocation">####</span></p>
+                                <a href="#EcoSystem" onclick="openParkMobile()"><img
+                                        src="assets/icons/ParkMobile-App-Icon.svg" class="Icons"></a>
+                                <p><span class="smalltxt">LOCATION</span><br><span id="ParkMobileLocation">####</span>
+                                </p>
                             </div>
                             <div>
-                                <button><a href="#EcoSystem" onclick="openParkMobile()" class="AppButton">ParkMobile</a></button>
+                                <button><a href="#EcoSystem" onclick="openParkMobile()"
+                                        class="AppButton">ParkMobile</a></button>
                             </div>
                         </div>
                     </div>
@@ -147,29 +156,37 @@
                     </th>
                 </tr>
                 <tr>
-                    <td style="width:30%;"><img src="assets/icons/ADA-Parking.svg" class="Icons" title="ADA parking is available." alt="ADA Parking Icon">
+                    <td style="width:30%;"><img src="assets/icons/ADA-Parking.svg" class="Icons"
+                            title="ADA parking is available." alt="ADA Parking Icon">
                     </td>
                     <td>ADA Parking</td>
                 </tr>
                 <tr>
-                    <td><img src="assets/icons/24-7.svg" class="Icons" title="24 hour parking is available." alt="24-7 Parking Icon"></td>
+                    <td><img src="assets/icons/24-7.svg" class="Icons" title="24 hour parking is available."
+                            alt="24-7 Parking Icon"></td>
                     <td>24/7 Parking</td>
                 </tr>
                 <tr>
-                    <td><img src="assets/icons/7ft-Tall.svg" class="Icons" title="7 foot clearance is available." alt="7ft Clearance Icon"></td>
+                    <td><img src="assets/icons/7ft-Tall.svg" class="Icons" title="7 foot clearance is available."
+                            alt="7ft Clearance Icon"></td>
                     <td>7FT Tall Clearance</td>
                 </tr>
                 <tr>
-                    <td><img src="assets/icons/EV.svg" class="Icons" title="Electric charging is available." alt="Electric Vehicle Charging Icon"></td>
+                    <td><img src="assets/icons/EV.svg" class="Icons" title="Electric charging is available."
+                            alt="Electric Vehicle Charging Icon"></td>
                     <td>Electric Charging</td>
                 </tr>
                 <tr>
-                    <td><img src="assets/icons/Roofcover-Parking.svg" class="Icons" title="Parking has roof covering." alt="Roofcovering Parking Icon"></td>
+                    <td><img src="assets/icons/Roofcover-Parking.svg" class="Icons" title="Parking has roof covering."
+                            alt="Roofcovering Parking Icon"></td>
                     <td>Roof Covering</td>
                 </tr>
             </table>
         </section>
-        <p style="text-align: center;color: white;font-size: 12pt;">Design by <a href="https://www.fortlauderdale.gov/tam" style="text-decoration:none; text-align: center;color: white;font-size: 12pt;">City of Fort Lauderdale</a></p>
+        <p style="text-align: center;color: white;font-size: 12pt;">Design by <a
+                href="https://www.fortlauderdale.gov/tam"
+                style="text-decoration:none; text-align: center;color: white;font-size: 12pt;">City of Fort
+                Lauderdale</a></p>
     </div>
 
     <script>
@@ -246,11 +263,11 @@
                 }
                 // Update PayByPhoneLocation element with dataset title
                 if (payByPhoneLocationElement) {
-                payByPhoneLocationElement.textContent = feature.properties.PayByPhone; // PayByPhone Location Number
+                    payByPhoneLocationElement.textContent = feature.properties.PayByPhone; // PayByPhone Location Number
                 }
                 // Display the infoPanel
                 infoPanel.style.display = 'block';
-                } else {
+            } else {
                 // Hide the infoPanel when the map is clicked but not on a feature
                 infoPanel.style.display = 'none';
             }
