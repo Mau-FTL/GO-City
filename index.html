@@ -246,7 +246,7 @@
                     titleElement.textContent = feature.properties.Title;
                 }
                 // Update the image source
-                if (feature.properties.Title === 'Fort Lauderdale Beach Parking' || feature.properties.Title === 'Las Olas Garage') {
+                if (feature.properties.Title === 'Fort Lauderdale Beach Parking' || feature.properties.Title === 'Las Olas Garage' || feature.properties.Title === 'Art & Science District Garage (PACA)' || feature.properties.Title === 'Bridgeside Place Garage' || feature.properties.Title === 'City Hall Garage' || feature.properties.Title === 'Cooleys Landing' || feature.properties.Title === 'County Lot 1' || feature.properties.Title === 'County Lot 2' || feature.properties.Title === 'E Clay Shaw West Lot' || feature.properties.Title === 'George English Lot' || feature.properties.Title === 'Heron Lot' || feature.properties.Title === 'River House Lot' || feature.properties.Title === 'Riverwalk Center Garage' || feature.properties.Title === 'Venice Lot') {
                     parkingImage.src = `/img/${feature.properties.Title}.jpg`;
                 } else {
                     parkingImage.src = '/img/PlaceHolder.png';
