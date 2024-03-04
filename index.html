@@ -194,23 +194,23 @@
         mapboxgl.accessToken = ACCESS_TOKEN;
         // Mapbox styles
         const lightStyle = 'mapbox://styles/mauriciobaquero/clnyraews008601o3gli891bh';
-        const darkStyle = 'mapbox://styles/mauriciobaquero/clq6dkd27001701pd1atpd4me';
-        // Check if dark mode is set
-        const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const mapStyle = isDarkMode ? darkStyle : lightStyle;
+        /*         const darkStyle = 'mapbox://styles/mauriciobaquero/clq6dkd27001701pd1atpd4me';
+                // Check if dark mode is set
+                const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const mapStyle = isDarkMode ? darkStyle : lightStyle; */
         // Mapbox styles
         const map = new mapboxgl.Map({
             container: 'map',
-            style: mapStyle, // Use the determined map style based on theme preference
+            style: lightStyle, // Use "mapStyle" for both dark and light mode
             center: [-80.1436755614412, 26.1184574886589],
             zoom: 16.5,
             pitch: 45
         });
-        // Optional: Add an event listener to change the map style if the user changes their color scheme preference
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            const newStyle = e.matches ? darkStyle : lightStyle;
-            map.setStyle(newStyle);
-        });
+        /*         // Optional: Add an event listener to change the map style if the user changes their color scheme preference
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    const newStyle = e.matches ? darkStyle : lightStyle;
+                    map.setStyle(newStyle);
+                }); */
         // Add the control to the map.
         const geocoder = new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
