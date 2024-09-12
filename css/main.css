@@ -1,5 +1,8 @@
 /* General */
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800&family=Josefin+Sans&family=Roboto:ital,wght@0,300;0,500;1,500;1,700&display=swap");
+html {
+
+}
 
 body {
  margin: 0 auto;
@@ -38,42 +41,44 @@ img.Icons-Small {
  width: 12vw;
 }
 
-button {
+.btn {
  border: none;
  border-radius: 25px;
  padding: 10px;
 }
 
-button a {
+.btn a {
  text-decoration: none;
  font-size: 15pt;
 }
 
-a.AppButton {
- font-size: 10pt;
-}
-
-/* Logo */
-#Logo {
- position: fixed;
- top: 5px;
- left: 5px;
+.active {
+	background-color: #bbb;
 }
 
 /* Map Box */
 #map {
  position: absolute;
- top: 0;
- bottom: 0;
+ top: 0px;
+ bottom: 0px;
  width: 100%;
  z-index: -1;
 }
 
-div.container2 {
+#infoPanel {
  position: absolute;
- top: 75%;
+ top: 60%;
  width: 100%;
- border-radius: 50px 50px 0px 0px;
+ border-radius: 50px;
+ z-index: 3;
+}
+
+#actionBar {
+	width: 60%;
+	height: 5px;
+	background-color: #aaa;
+	border-radius: 25px;
+	margin: 10px auto; /* Center the bar */
 }
 
 /* Title */
@@ -83,11 +88,44 @@ div.container2 {
  font-size: 10vw;
 }
 
+.Availability {
+    padding: 1em;
+    background-color: #F2F6FD; /* Example background, adjust as needed */
+    border-radius: 50px; /* Adjusted to match other sections */
+}
+
+.Availability h3 {
+    color: #053B62;
+    text-align: center;
+}
+
+.occupancy-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 1em; /* Adds space between the title and the numbers */
+}
+
+.Availability p {
+    flex: 1; /* Ensures that each p tag takes up equal space */
+    text-align: center;
+    font-size: 1em; /* Adjust font size as needed */
+    color: #707577; /* Example text color, adjust as needed */
+    margin: 0; /* Removes default paragraph margins */
+}
+
+.Availability p span {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block; /* Makes the number appear above the text */
+}
+
+
 /* Photo */
 .Photo {
   overflow: hidden; /* Ensures the image does not spill out of the rounded corners */
   padding: 0 !important; /* Remove padding to allow the image to fill the entire section */
-  height:350px;
+  height:200px;
 }
 
 .Photo img {
@@ -117,6 +155,10 @@ section.Availability p span {
  text-align: center;
 }
 
+.Icons-Small img{
+    width:50px;
+}
+
 /* Address */
 address a {
  text-decoration: none;
@@ -142,7 +184,7 @@ address a {
 #Apps-Grid {
  display: grid;
  justify-content: space-evenly;
- grid-template-columns: 50% 50%;
+ grid-template-columns: 100%;
  gap: 5px;
  margin-top: 1em;
  text-align: center;
@@ -153,7 +195,7 @@ address a {
 }
 
 .App div img {
- width: 32vw;
+ width: 50vw;
 }
 
 .App div p {
@@ -166,18 +208,18 @@ address a {
 }
 
 /* Amenities Table */
-table.Amenities-Icons caption {
+table #Amenities-Icons caption {
  caption-side: bottom;
  font-size: 12pt;
  margin-top: 10px;
 }
 
-table.Amenities-Icons {
+table #Amenities-Icons {
  width: 100%;
  border-spacing: 2vw;
 }
 
-@media screen and (min-width: 933px) {
+@media screen and (min-width: 650px) {
  h1 {
   font-size: 24pt;
  }
@@ -198,17 +240,13 @@ table.Amenities-Icons {
   width: 50px;
  }
 
- button a {
+ .btn a {
   font-size: 15pt;
  }
 
- a.AppButton {
-  font-size: 15pt;
- }
-
- div.container2 {
+ #infoPanel {
   position: absolute;
-  top: 60px;
+  top: 70px;
   right: 10px;
   width: 350px;
  }
@@ -233,7 +271,7 @@ table.Amenities-Icons {
   display: grid;
   justify-content: space-evenly;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  gap: 5px;
+  gap: 0px;
   padding: 2px;
   margin-top: 0;
   text-align: center;
@@ -246,7 +284,6 @@ table.Amenities-Icons {
  #Apps-Grid {
   display: grid;
   justify-content: space-evenly;
-  grid-template-columns: 100%;
   gap: 50px;
   padding: 0;
   margin-top: 10px;
@@ -256,11 +293,11 @@ table.Amenities-Icons {
   width: 200px;
  }
 
- table.Amenities-Icons caption {
+ table #Amenities-Icons caption {
   margin-top: 10px;
  }
 
- table.Amenities-Icons {
+ table #Amenities-Icons {
   width: 100%;
   border-spacing: 2px;
  }

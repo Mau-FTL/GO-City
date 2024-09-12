@@ -1,4 +1,4 @@
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) { } */
 
 /* General */
 body {
@@ -29,20 +29,20 @@ section {
     color-scheme: only light;
 }
 
-button {
+.btn {
     background-color: #ebb55c;
 }
 
-button:hover {
+.btn:hover {
     background-color: #FFCE7E;
 }
 
-button a {
+.btn a {
     color: #000;
 }
 
 /* Info Panel */
-div.container2 {
+#infoPanel {
     background: rgb(5, 59, 98);
 }
 
@@ -68,6 +68,4 @@ address a {
 
 .EcoSystem div h3 {
     color: #fff;
-}
-
 }
