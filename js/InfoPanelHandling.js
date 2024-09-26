@@ -1,14 +1,46 @@
-// Temporary Test API URL link for occupancy
+// API URL link for occupancy
 const VERGE_API_URL = 'https://verge-api.vergebi.com/v2/api/lots/occupancy?lotIds=379,385,386,387,388';
 
 const INFOPANEL = document.getElementById('infoPanel');
 let currentFeature = null;
 
+// Start loading effect - assuming you keep the structure where <span> is inside <p> without moving the IDs
+function loadingEffect() {
+    // Ensure this targets spans within the specific occupancy IDs
+    const spans = document.querySelectorAll('.occupancy-grid p span');
+    spans.forEach(span => {
+        let tens = 0;  // Represents the tens place
+        let units = 0; // Represents the units place
+
+        span.textContent = "00"; // Set initial value to "00"
+        span.loadingInterval = setInterval(() => {
+            units = (units + 1) % 10; // Increment units place, wrap around at 10
+            tens = (tens + 1) % 10;  // Increment tens place, wrap around at 10
+
+            span.textContent = `${tens}${units}`; // Update text to reflect new numbers
+        }, 5);
+    });
+}
+
+function stopLoadingEffect(category) {
+    // Make sure this targets the correct span
+    const span = document.querySelector(`#${category} span`);
+    if (span && span.loadingInterval) {
+        clearInterval(span.loadingInterval);
+    } else {
+        console.error("Failed to find span or loadingInterval for category:", category);
+    }
+}
+
 // Function to fetch JSON data
 async function fetchJson(url) {
     const response = await fetch(url);
-    if (!response.ok) throw new Error('Network response was not ok: ' + response.statusText);
-    return response.json();
+    if (!response.ok) {
+        throw new Error('Network response was not ok: ' + response.statusText);
+    }
+    const data = await response.json();
+    console.log("API Data:", data);  // Log to see the data structure
+    return data;
 }
 
 // Function to calculate parking availability based on the Verge API data
@@ -30,25 +62,8 @@ function calculateParkingAvailability(data, currentFeatureTitle) {
             break; // Break as soon as the correct lot is found
         }
     }
+    console.log("Calculated Availability:", {general, ev, ada});
     return { general, ev, ada };
-}
-
-// Start loading effect
-function loadingEffect() {
-    const digits = document.querySelectorAll('.occupancy-grid span');
-    digits.forEach(span => {
-        let count = 0;
-        span.loadingInterval = setInterval(() => {
-            span.textContent = count;
-            count = (count + 1) % 10;
-        }, 5);
-    });
-}
-
-// Stop loading effect for a specific category
-function stopLoadingEffect(category) {
-    const span = document.querySelector(`#${category} span`);
-    clearInterval(span.loadingInterval);
 }
 
 // Function to update parking availability in the DOM
@@ -57,33 +72,27 @@ async function fetchAndUpdateAvailability(shouldShowLoading = true) {
         loadingEffect();  // Start the slot machine effect for each digit
     }
 
-    try {
-        const response = await fetchJson(VERGE_API_URL);
-        const data = response.data;
-        const { general, ev, ada } = calculateParkingAvailability(data, currentFeature.properties.Title);
+    const response = await fetchJson(VERGE_API_URL);
+    const data = response.data;  // Ensure 'data' is correctly accessed
+    const { general, ev, ada } = calculateParkingAvailability(data, currentFeature.properties.Title);
 
-        document.getElementById('generalOccupancy').innerHTML = `<span>${general}</span><br>General`;
-        stopLoadingEffect('generalOccupancy');
+    document.getElementById('generalOccupancy').innerHTML = `<span>${general}</span><br>General`;
+    stopLoadingEffect('generalOccupancy');
 
-        document.getElementById('evOccupancy').innerHTML = `<span>${ev}</span><br>EV`;
-        stopLoadingEffect('evOccupancy');
+    document.getElementById('evOccupancy').innerHTML = `<span>${ev}</span><br>EV`;
+    stopLoadingEffect('evOccupancy');
 
-        document.getElementById('adaOccupancy').innerHTML = `<span>${ada}</span><br>ADA`;
-        stopLoadingEffect('adaOccupancy');
-    } catch (error) {
-        console.error('Error fetching availability data:', error);
-        document.getElementById('generalOccupancy').innerHTML = 'N/A<br>General';
-        document.getElementById('evOccupancy').innerHTML = 'N/A<br>EV';
-        document.getElementById('adaOccupancy').innerHTML = 'N/A<br>ADA';
-        // Stop all animations in case of error
-        stopLoadingEffect('generalOccupancy');
-        stopLoadingEffect('evOccupancy');
-        stopLoadingEffect('adaOccupancy');
-    }
+    document.getElementById('adaOccupancy').innerHTML = `<span>${ada}</span><br>ADA`;
+    stopLoadingEffect('adaOccupancy');
 }
 
 // Function to update info panel and show elements
 function updateInfoPanel(feature) {
+    if (!feature || !feature.properties) {
+        console.error("Invalid feature or missing properties:", feature);
+        return; // Stop execution if feature is not correctly defined
+    }
+
     currentFeature = feature;
 
     updateTitle(feature);
@@ -93,10 +102,11 @@ function updateInfoPanel(feature) {
     updateApps(feature);
     updateIconsAndAmenities(feature);
 
-    fetchAndUpdateAvailability(); // Fetch availability data whenever the info panel is updated
-
+    console.log("Feature set in updateInfoPanel:", feature);
+    fetchAndUpdateAvailability(); // Fetch data after setting currentFeature
     INFOPANEL.style.display = 'block';
 }
+
 
 // Change Title text in infopanel with data properties from layers
 function updateTitle(feature) {
